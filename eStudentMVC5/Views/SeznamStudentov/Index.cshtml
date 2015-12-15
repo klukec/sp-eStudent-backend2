@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<uporabnik>
 @{
     ViewBag.Title = "Seznam študentov";
-    WebGrid grid = new WebGrid(Model);
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -17,31 +16,6 @@
         });
     </script>
 }
-
-<table>
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Uredi</th>
-            <th>Izbrisi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var s in Model)
-        {
-
-            <tr>
-                <td>@s.ime</td>
-                <td>@s.priimek</td>
-                <td>@Html.ActionLink("Create New", "Create")</td>
-            </tr>
-
-        }
-    </tbody>
-</table>
-
-
 
 <div class="row">
     <div class="col-lg-12">
@@ -73,39 +47,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>63130164</td>
-                                <td>Matic Novak</td>
-                                <td>mn9499@student.uni-lj.si</td>
-                                <td>041 721 924</td>
-                                <td>3</td>
-                                <td>
-                                    <button type="button" class="btn btn-outline btn-info btn-sm">Uredi</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>63130165</td>
-                                <td>Jože Novak</td>
-                                <td>mn9499@student.uni-lj.si</td>
-                                <td>041 721 924</td>
-                                <td>3</td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-sm disabled">Uredi</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>63130166</td>
-                                <td>Mateja Novak</td>
-                                <td>mn9499@student.uni-lj.si</td>
-                                <td>041 721 924</td>
-                                <td>3</td>
-                                <td>
-                                    <button type="button" class="btn btn-info btn-sm disabled">Uredi</button>
-                                </td>
-                            </tr>
+                            @foreach (var s in Model)
+                            {
+                                <tr>
+                                    <td>@s.idUporabnik</td>
+                                    <td>@s.vpisnaStevilka</td>
+                                    <td>@s.ime @s.priimek</td>
+                                    <td>@s.email</td>
+                                    <td>@s.mobi</td>
+                                    <td>@s.letnikStudija</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline btn-info btn-sm">
+                                        @Html.ActionLink("Uredi", "Index", "UporabniskiPodatki")
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
