@@ -11,7 +11,10 @@ namespace eStudentMVC5.Controllers
         // GET: Indeks
         public ActionResult Index()
         {
-            
+            var dbContext = new estudentEntities();
+            var user = dbContext.uporabnik.Find(1);
+            string ime = user.ime;
+            ViewBag.imeUporabnika = ime;
             return View();
         }
     }
