@@ -168,6 +168,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndeksController.cs" />
     <Compile Include="Controllers\LokacijaFakulteteController.cs" />
+    <Compile Include="Controllers\SeznamStudentovController.cs" />
     <Compile Include="entitete.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,6 +282,7 @@
     <Content Include="Views\Shared\_Layout_original.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\LokacijaFakultete\Index.cshtml" />
+    <Content Include="Views\SeznamStudentov\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

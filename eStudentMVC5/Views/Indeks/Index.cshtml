@@ -1,8 +1,149 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Elektronski indeks";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.imeUporabnika</h2>
+@section Specific{
+    <script src="~/static/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/static/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+}
 
+<h2>@ViewBag.imeUporabnika</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Elektronski indeks</h1>
+
+        <div class="btn-group btn-breadcrumb">
+            <a href="/" class="btn btn-default"><i class="fa fa-home"></i></a></a>
+            <a href="@Url.Action("Index", "SeznamStudentov")" class="btn btn-default">Seznam študentov</a>
+            <a href="#" class="btn btn-default">Elektronski indeks</a>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading red">
+                Elektronski indeks
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive table-bordered">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Predmet</th>
+                                <th>Ocenil</th>
+                                <th>Letnik</th>
+                                <th>Datum</th>
+                                <th>Polaganje</th>
+                                <th>KT</th>
+                                <th>Ocena</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Diskretne strukture</td>
+                                <td>Gašper Fijavž</td>
+                                <td>1. letnik</td>
+                                <td>20.1.2014</td>
+                                <td>1.</td>
+                                <td>6</td>
+                                <td>8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading red">
+                Skupna povprečna ocena
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Število opravljenih izpitov</th>
+                                <th>Kreditne točke</th>
+                                <th>Skupno povprečje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20</td>
+                                <td>120</td>
+                                <td>8,5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
