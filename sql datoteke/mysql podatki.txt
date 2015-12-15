@@ -1,7 +1,0 @@
-estudent - baza
-eStudent - up. ime
-spletno  - geslo
-
-localhost
-tcp/ip
-3306
