@@ -1,0 +1,11 @@
+estudent - baza
+eStudent - up. ime
+spletno  - geslo
+
+localhost
+tcp/ip
+3306
+
+C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysqld"
+
+C:Users:Matic-HpProbook/mysql/bin
