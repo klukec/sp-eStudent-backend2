@@ -276,6 +276,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Indeks\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

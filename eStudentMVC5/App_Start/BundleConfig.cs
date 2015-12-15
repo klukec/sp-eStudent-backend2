@@ -27,6 +27,30 @@ namespace eStudentMVC5
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+
+            /*** Custom CSS and JavaScript ***/
+            bundles.Add(new StyleBundle("~/Content/matic").Include(
+                      //"~/Content/bootstrap.css",
+                      "~/static/bower_components/bootstrap/dist/css/bootstrap.min.css",
+                      "~/static/bower_components/metisMenu/dist/metisMenu.min.css",
+                      "~/static/dist/css/sb-admin-2.css",
+                      "~/static/dist/css/custom.css",
+                      //"~/static/bower_components/morrisjs/morris.css",
+                      "~/static/bower_components/metisMenu/dist/metisMenu.min.css",
+                      "~/static/bower_components/font-awesome/css/font-awesome.min.css"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/matic").Include(
+                      //"~/static/bower_components/jquery/dist/jquery.min.js",
+                      //"~/static/bower_components/bootstrap/dist/js/bootstrap.min.js",
+                      "~/static/bower_components/metisMenu/dist/metisMenu.min.js",
+                      //"~/static/bower_components/raphael/raphael-min.js",
+                      //"~/static/bower_components/morrisjs/morris.min.js",
+                      "~/static/dist/js/sb-admin-2.js",
+                      "~/static/dist/js/custom.js"
+                      ));
+
+
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = true;
