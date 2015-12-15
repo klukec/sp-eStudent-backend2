@@ -163,9 +163,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndeksController.cs" />
+    <Compile Include="Controllers\LokacijaFakulteteController.cs" />
     <Compile Include="entitete.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -277,6 +279,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Indeks\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_original.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\LokacijaFakultete\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

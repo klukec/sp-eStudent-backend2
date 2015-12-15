@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">O programu e-Študent</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading red">
+                All about
+            </div>
+            <!-- .panel-heading -->
+            <div class="panel-body">
+                <div class="panel-group minVisina" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading red">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">O aplikaciji</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body text-justify">
+                                Aplikacija e-Študent je bila razvita v okviru predmeta Spletno programiranje na Fakulteti za računalništvo in informatiko. Omogoča informatizacijo študijskega procesa: vodi evidenco o predmetih, profesorjih, študentih, njihovih ocenah... Aplikacija ni razvita do te mere, da bi se lahko uporabljala v produkcijske namene, saj ni poskrbljeno za varnost, https, SSL certifikat.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading red">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Piškotki</a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body text-justify">
+                                Spletna aplikacija uporabniku avtomatsko namesti zgolj en piškotek. Tega uporablja v testne namene in ne beleži nikakršne informacije, ki bi imela višji pomen. Modalnega dialoga o nameščanju piškotka uporabniku ne prikaže, saj je piškotkov namen trivialen.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading red">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Avtorstvo</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <ul class="puscica">
+                                    <li>Avtor programa: Matic Novak</li>
+                                    <li>Fakulteta za računalništvo in informatiko</li>
+                                    <li>Univerzitetni program, 3. letnik, 2015/2016</li>
+                                    <li>Predmet: Spletno programiranje</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading red">
+                Predstavitveni video
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <video class="film" controls>
+                    <source src="../video/fri_predstavitev.mp4" type="video/mp4">
+                    Vaš brskalnik ne podpira predvajanja video vsebin.
+                </video>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+    <!-- /.col-lg-6 -->
+</div>
