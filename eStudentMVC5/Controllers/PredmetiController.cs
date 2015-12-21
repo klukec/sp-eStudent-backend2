@@ -35,9 +35,8 @@ namespace eStudentMVC5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Posodobi(FormCollection collection)
+        public ActionResult Posodobi(predmet p)
         {
-            string var1 = collection["imePredmeta"];
             return View(); 
         }
 
