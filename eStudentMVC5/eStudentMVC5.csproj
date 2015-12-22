@@ -194,6 +194,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Logger.cs" />
+    <Compile Include="Models\PredmetiModel.cs" />
     <Compile Include="ocena.cs">
       <DependentUpon>entitete.tt</DependentUpon>
     </Compile>
@@ -290,6 +292,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\Logger\" />
+    <Folder Include="Views\PredmetiModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

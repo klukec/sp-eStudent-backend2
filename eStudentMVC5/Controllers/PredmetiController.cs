@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eStudentMVC5.Models;
 
 namespace eStudentMVC5.Controllers
 {
@@ -13,32 +14,44 @@ namespace eStudentMVC5.Controllers
         // GET: Predmeti
         public ActionResult Index()
         {
+            // Zgornja tabela predmetov.
+            var predmeti = from s in db.predmet select s;
+            List<predmet> predmetiR = predmeti.ToList();
+
+            // Spodnje polje za urejanje predmeta.
             var predmet = new predmet();
             predmet.seznamIzvajalcev = VrniVseProfesorje();
-            return View(predmet);
+            //return View(predmet);
+
+            var model = new PredmetiModel { seznamPredmetov = predmetiR, predmetEdit = predmet };
+            return View(model);
         }
 
         //[ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Index(predmet p)
+        public ActionResult Index(PredmetiModel p)
         {
             if (ModelState.IsValid)
             {
-                try
+                if (p.predmetEdit.stKreditnih > 0)
                 {
-                    db.predmet.Add(p);
-                    int id = db.SaveChanges();
-                    ModelState.Clear();
+                    try
+                    {
+                        db.predmet.Add(p.predmetEdit);
+                        int id = db.SaveChanges();
+                        ModelState.Clear();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Predmet ni bil vstavljen v bazo.");
+                    }
                 }
-                catch
+                else
                 {
-                    Console.WriteLine("Predmet ni bil vstavljen v bazo.");
+                    Console.WriteLine("Predmet mora imeti veljavno stevilo kreditnih tock.");
                 }
             }
-
-            var predmet = new predmet();
-            predmet.seznamIzvajalcev = VrniVseProfesorje();
-            return View(predmet);
+            return RedirectToAction("Index");
         }
 
         private IEnumerable<SelectListItem> VrniVseProfesorje()
