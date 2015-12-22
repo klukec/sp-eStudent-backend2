@@ -45,7 +45,7 @@
                                         <td>@s.stKreditnih</td>
                                         <td>
                                             <button type="button" class="btn btn-outline btn-info btn-sm">
-                                                @Html.ActionLink("Uredi", "Posodobi", "Predmeti")
+                                                @Html.ActionLink("Uredi", "Index", "Predmeti", new { idPredmet = @s.idPredmet }, null)
                                             </button>
                                         </td>
                                     </tr>
@@ -72,6 +72,9 @@
                     @Html.ValidationSummary(true)
                     <form>
                         <div class="form-group">
+
+                            @Html.TextBoxFor(m => m.predmetEdit.idPredmet, new { data_bind = "value: idPredmet", @type = "hidden" })
+
                             <label>Ime predmeta</label>
                             @Html.TextBoxFor(m => m.predmetEdit.imePredmeta, new { data_bind = "value: imePredmeta", @class = "form-control", @required = "required" })
                         </div>

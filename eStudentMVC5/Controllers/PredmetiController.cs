@@ -13,10 +13,19 @@ namespace eStudentMVC5.Controllers
         estudentEntities db = new estudentEntities();
 
         // GET: Predmeti
-        public ActionResult Index()
+        public ActionResult Index(string idPredmet = "")
         {
-            var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = new predmet() };
-            return View(model);
+            if (idPredmet.Length == 0)
+            {
+                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = new predmet() };
+                return View(model);
+            }
+            else
+            {
+                predmet p = db.predmet.Find(Int32.Parse(idPredmet));
+                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = p };
+                return View(model);
+            }  
         }
 
         [HttpPost]
@@ -26,11 +35,20 @@ namespace eStudentMVC5.Controllers
             {
                 try
                 {
-                    db.predmet.Add(p.predmetEdit);
-                    int uspeh = db.SaveChanges();
-                    int newId = p.predmetEdit.idPredmet;
-                    Log.Info("Nov predmet ima ID: " + newId);
-                    ModelState.Clear();
+                    if (p.predmetEdit.idPredmet == 0)
+                    {
+                        db.predmet.Add(p.predmetEdit);
+                        int uspeh = db.SaveChanges();
+                        int newId = p.predmetEdit.idPredmet;
+                        Log.Info("Nov predmet ima ID: " + newId);
+                        ModelState.Clear();
+                    }
+                    else
+                    {
+                        db.Entry(p.predmetEdit).State = System.Data.Entity.EntityState.Modified;
+                        int uspeh = db.SaveChanges();
+                    }
+                    
                 }
                 catch
                 {
