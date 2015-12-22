@@ -28,6 +28,8 @@ namespace eStudentMVC5.Controllers
                 {
                     db.predmet.Add(p.predmetEdit);
                     int uspeh = db.SaveChanges();
+                    int newId = p.predmetEdit.idPredmet;
+                    Log.Info("Nov predmet ima ID: " + newId);
                     ModelState.Clear();
                 }
                 catch
