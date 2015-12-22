@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace eStudentMVC5.Controllers
 {
+    [Authorize]
     public class UporabniskiPodatkiController : Controller
     {
         estudentEntities db = new estudentEntities();
@@ -13,15 +14,24 @@ namespace eStudentMVC5.Controllers
         // GET: UporabniskiPodatki
         public ActionResult Index(int idUporabnik = 0)
         {
-            if (idUporabnik == 0)
+            try
             {
-                return View(new uporabnik());
+                uporabnik tren = (from s in db.uporabnik where s.email.Equals(User.Identity.Name) select s).ToList().First();
+                if (idUporabnik == 0)
+                {
+                    return View(tren);
+                }
+                else
+                {
+                    uporabnik u = db.uporabnik.Find(idUporabnik);
+                    return View(u);
+                }  
             }
-            else
+            catch
             {
-                uporabnik u = db.uporabnik.Find(idUporabnik);
-                return View(u);
-            }  
+                Log.Error("Prislo je do napake pri ugotavljanju uporabnika.");
+            }
+            return View(new uporabnik());
         }
 
         [HttpPost]

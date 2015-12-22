@@ -42,7 +42,6 @@ namespace eStudentMVC5
         [Required]
         public string geslo { get; set; }
 
-        [RegularExpression(@"^\d{1,3}.\d{1,3}.\d{1,3}$", ErrorMessage = "Neveljavna telefonska stevilka.")]
         public string mobi { get; set; }
 
         [Required]
