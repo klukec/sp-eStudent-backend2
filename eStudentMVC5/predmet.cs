@@ -13,10 +13,14 @@ namespace eStudentMVC5
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class predmet
     {
+        estudentEntities db = new estudentEntities();
+
         public predmet()
         {
             this.izpitnirok = new HashSet<izpitnirok>();
@@ -25,14 +29,42 @@ namespace eStudentMVC5
         }
     
         public int idPredmet { get; set; }
+
+        [Required]
         public string imePredmeta { get; set; }
+
+        [Required]
         public int idIzvajalca { get; set; }
+
+        [Required]
+        [Range(1, 12, ErrorMessage = "Stevilka med 1 in 12.")]
         public int stKreditnih { get; set; }
     
         public virtual ICollection<izpitnirok> izpitnirok { get; set; }
         public virtual ICollection<ocena> ocena { get; set; }
         public virtual ICollection<studentpredmet> studentpredmet { get; set; }
         public virtual uporabnik uporabnik { get; set; }
-        public virtual IEnumerable<SelectListItem> seznamIzvajalcev { get; set; }
+        
+        public virtual IEnumerable<SelectListItem> seznamIzvajalcev {
+            get
+            {
+                return VrniVseProfesorje();
+            }
+        }
+
+        private IEnumerable<SelectListItem> VrniVseProfesorje()
+        {
+            var prof = from s in db.uporabnik where s.idVloge.Equals(2) select s;
+            List<uporabnik> profesorji = prof.ToList();
+
+            IEnumerable<SelectListItem> selectProfesor = from c in profesorji
+                                                         select new SelectListItem
+                                                         {
+                                                             Selected = (c.idUporabnik == 0),
+                                                             Text = c.ime + " " + c.priimek,
+                                                             Value = c.idUporabnik.ToString()
+                                                         };
+            return selectProfesor;
+        }
     }
 }

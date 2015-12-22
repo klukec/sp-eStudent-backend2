@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eStudentMVC5.Models;
+using System.Diagnostics;
 
 namespace eStudentMVC5.Controllers
 {
@@ -14,59 +15,41 @@ namespace eStudentMVC5.Controllers
         // GET: Predmeti
         public ActionResult Index()
         {
-            // Zgornja tabela predmetov.
-            var predmeti = from s in db.predmet select s;
-            List<predmet> predmetiR = predmeti.ToList();
-
-            // Spodnje polje za urejanje predmeta.
-            var predmet = new predmet();
-            predmet.seznamIzvajalcev = VrniVseProfesorje();
-            //return View(predmet);
-
-            var model = new PredmetiModel { seznamPredmetov = predmetiR, predmetEdit = predmet };
+            var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = new predmet() };
             return View(model);
         }
 
-        //[ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Index(PredmetiModel p)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Ali ustreza konstraintom v modelu?
             {
-                if (p.predmetEdit.stKreditnih > 0)
+                try
                 {
-                    try
-                    {
-                        db.predmet.Add(p.predmetEdit);
-                        int id = db.SaveChanges();
-                        ModelState.Clear();
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Predmet ni bil vstavljen v bazo.");
-                    }
+                    db.predmet.Add(p.predmetEdit);
+                    int uspeh = db.SaveChanges();
+                    ModelState.Clear();
                 }
-                else
+                catch
                 {
-                    Console.WriteLine("Predmet mora imeti veljavno stevilo kreditnih tock.");
+                    Log.Error("Predmet ni bil vstavljen v bazo.");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
+                Log.Debug("Predmetu je bilo nastavljeno " + p.predmetEdit.stKreditnih + " kreditnih tock.");
+                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = p.predmetEdit };
+                return View(model);
             }
             return RedirectToAction("Index");
         }
 
-        private IEnumerable<SelectListItem> VrniVseProfesorje()
+        private List<predmet> vrniVsePredmete()
         {
-            var prof = from s in db.uporabnik where s.idVloge.Equals(2) select s;
-            List<uporabnik> profesorji = prof.ToList();
-
-            IEnumerable<SelectListItem> selectProfesor = from c in profesorji
-                                                         select new SelectListItem
-                                                         {
-                                                             Selected = (c.idUporabnik == 0),
-                                                             Text = c.ime + " " + c.priimek,
-                                                             Value = c.idUporabnik.ToString()
-                                                         };
-            return selectProfesor;
+            var predmeti = from s in db.predmet select s;
+            List<predmet> predmetiR = predmeti.ToList();
+            return predmetiR;
         }
     }
 }
