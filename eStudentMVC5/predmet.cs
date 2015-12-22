@@ -7,10 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+
 namespace eStudentMVC5
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Mvc;
     
     public partial class predmet
     {
@@ -30,5 +33,6 @@ namespace eStudentMVC5
         public virtual ICollection<ocena> ocena { get; set; }
         public virtual ICollection<studentpredmet> studentpredmet { get; set; }
         public virtual uporabnik uporabnik { get; set; }
+        public virtual IEnumerable<SelectListItem> seznamIzvajalcev { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model Tuple<List<predmet>, predmet>
+﻿@model predmet
 @{
     ViewBag.Title = "Predmeti";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,20 +33,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var s in Model.Item1)
-                            {
-                                <tr>
-                                    <td>@s.idPredmet</td>
-                                    <td>@s.imePredmeta</td>
-                                    <td>@s.uporabnik.ime @s.uporabnik.priimek</td>
-                                    <td>@s.stKreditnih</td>
-                                    <td>
-                                        <button type="button" class="btn btn-outline btn-info btn-sm">
-                                            @Html.ActionLink("Uredi", "Posodobi", "Predmeti")
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
+                            @*@foreach (var s in Model.Item1)
+                                {
+                                    <tr>
+                                        <td>@s.idPredmet</td>
+                                        <td>@s.imePredmeta</td>
+                                        <td>@s.uporabnik.ime @s.uporabnik.priimek</td>
+                                        <td>@s.stKreditnih</td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline btn-info btn-sm">
+                                                @Html.ActionLink("Uredi", "Posodobi", "Predmeti")
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }*@
                         </tbody>
                     </table>
                 </div>
@@ -64,20 +64,20 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                @using (Html.BeginForm("Posodobi", "Predmeti", FormMethod.Post))
+                @using (Html.BeginForm("Index", "Predmeti", FormMethod.Post))
                 {
                     <form>
                         <div class="form-group">
                             <label>Ime predmeta</label>
-                            @Html.TextBoxFor(m => m.Item2.imePredmeta, new { data_bind = "value: imePredmeta", @class = "form-control", @required = "required" })
+                            @Html.TextBoxFor(m => m.imePredmeta, new { data_bind = "value: imePredmeta", @class = "form-control", @required = "required" })
                         </div>
                         <div class="form-group">
                             <label>Profesor</label>
-                            @Html.DropDownList("profesorji", null, String.Empty, new { @class = "form-control", @required = "required" })
+                            @Html.DropDownListFor(m => m.idIzvajalca, Model.seznamIzvajalcev, "Izberite profesorja", new { @class = "form-control", @required = "required" })
                         </div>
                         <div class="form-group">
                             <label>Število kreditnih točk</label>
-                            @Html.TextBoxFor(m => m.Item2.stKreditnih, new { data_bind = "value: stKreditnih", @class = "form-control", @required = "required", @pattern = "\\d{1,2}" })
+                            @Html.TextBoxFor(m => m.stKreditnih, new { data_bind = "value: stKreditnih", @class = "form-control", @required = "required", @pattern = "\\d{1,2}" })
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Shrani podatke o predmetu"
