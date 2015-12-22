@@ -11,6 +11,7 @@ namespace eStudentMVC5
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class uporabnik
     {
@@ -20,18 +21,42 @@ namespace eStudentMVC5
             this.predmet = new HashSet<predmet>();
             this.studentpredmet = new HashSet<studentpredmet>();
         }
-    
+
+        [Required]
         public int idUporabnik { get; set; }
+
         public Nullable<int> vpisnaStevilka { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[A-z]*$", ErrorMessage = "Neveljavno ime.")]
         public string ime { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[A-z]*$", ErrorMessage = "Neveljaven priimek.")]
         public string priimek { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[\w\d-\.]+@([\w\d-]+\.)+[\w-]{2,4}$", ErrorMessage = "Neveljaven elektronski naslov.")]
         public string email { get; set; }
+
+        [Required]
         public string geslo { get; set; }
+
+        [RegularExpression(@"^\d{1,3}.\d{1,3}.\d{1,3}$", ErrorMessage = "Neveljavna telefonska stevilka.")]
         public string mobi { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[MZ]*$", ErrorMessage = "Neveljaven spol.")]
         public string spol { get; set; }
+
+        [RegularExpression(@"^[123]{1}$", ErrorMessage = "Neveljaven letnik studija.")]
         public Nullable<int> letnikStudija { get; set; }
+
+        [Required]
         public System.DateTime datumRegistracije { get; set; }
+
         public System.DateTime zadnjiDostop { get; set; }
+
         public int idVloge { get; set; }
     
         public virtual ICollection<ocena> ocena { get; set; }

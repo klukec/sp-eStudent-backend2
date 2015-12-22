@@ -11,14 +11,27 @@ namespace eStudentMVC5
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class ocena
     {
+        [Required]
         public int idOcena { get; set; }
+
+        [Required]
         public int idStudenta { get; set; }
+
+        [Required]
         public int idPredmeta { get; set; }
+
+        [Required]
         public int idIzpitnegaRoka { get; set; }
+
+        [Required]
         public int sTock { get; set; }
+
+        [Required]
+        [Range(1, 10, ErrorMessage = "Stevilka med 1 in 10.")]
         public int ocena1 { get; set; }
     
         public virtual izpitnirok izpitnirok { get; set; }

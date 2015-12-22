@@ -58,7 +58,7 @@
                                     <td>@s.letnikStudija</td>
                                     <td>
                                         <button type="button" class="btn btn-outline btn-info btn-sm">
-                                        @Html.ActionLink("Uredi", "Index", "UporabniskiPodatki")
+                                        @Html.ActionLink("Uredi", "Index", "UporabniskiPodatki", new { idUporabnik = @s.idUporabnik }, null)
                                         </button>
                                     </td>
                                 </tr>

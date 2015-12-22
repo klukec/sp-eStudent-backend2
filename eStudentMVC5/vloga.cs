@@ -11,6 +11,7 @@ namespace eStudentMVC5
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class vloga
     {
@@ -18,8 +19,11 @@ namespace eStudentMVC5
         {
             this.uporabnik = new HashSet<uporabnik>();
         }
-    
+
+        [Required]
         public int idVloga { get; set; }
+
+        [Required]
         public string nazivVloge { get; set; }
     
         public virtual ICollection<uporabnik> uporabnik { get; set; }
