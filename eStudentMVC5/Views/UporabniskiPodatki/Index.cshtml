@@ -10,127 +10,137 @@
 }
 
 
-@*@if (Request.IsAuthenticated) {
-    if (User.IsInRole("Admin")) {*@
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Osebni podatki</h1>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Osebni podatki</h1>
-
-        <div class="btn-group btn-breadcrumb">
-            <a href="index.html" class="btn btn-default"><i class="fa fa-home"></i></a>
-            <a href="@Url.Action("Index", "SeznamStudentov" )" class="btn btn-default">Seznam študentov</a>
-            <a href="#" class="btn btn-default">Osebni podatki</a>
-        </div>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-
-<div class="row">
-    <div class="col-lg-12">
-
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading red">
-                    Osebni podatki
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    @using (Html.BeginForm("Index", "UporabniskiPodatki", FormMethod.Post))
-                    {
-                        @Html.ValidationSummary(true)
-                        <form>
-                            @Html.TextBoxFor(m => m.idUporabnik, new { data_bind = "value: idUporabnik", @type = "hidden" })
-
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.ime, new { data_bind = "value: ime", @class = "form-control", @required = "required", @pattern = "[A-z]*", @placeholder = "ime" })
-                                @Html.ValidationMessageFor(m => m.ime)
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.priimek, new { data_bind = "value: priimek", @class = "form-control", @required = "required", @pattern = "[A-z]*", @placeholder = "priimek" })
-                                @Html.ValidationMessageFor(m => m.priimek)
-                            </div>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.mobi, new { data_bind = "value: mobi", @type = "tel", @class = "form-control", @required = "required", @pattern = @"\d{1,3}.\d{1,3}.\d{1,3}", @placeholder = "mobilni telefon (ex. 041 000 000)" })
-                                @Html.ValidationMessageFor(m => m.mobi)
-                            </div>
-                            <div class="form-group">
-                                <label class="desno20">Spol</label>
-                                <label class="radio-inline">
-                                    @Html.RadioButton("spol", "M")moški
-                                </label>
-                                <label class="radio-inline">
-                                    @Html.RadioButton("spol", "Z")ženski
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="desno20">Vloga</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="vloga" id="student" value="student" checked>študent
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="vloga" id="profesor" value="profesor">profesor
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="vloga" id="administrator" value="administrator">administrator
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Shrani osebne podatke" class="btn btn-danger btn-block" id="shraniOsebne">
-                            </div>
-                        </form>
-                    }
-                </div>
-                <!-- /.panel-body -->
+            <div class="btn-group btn-breadcrumb">
+                <a href="index.html" class="btn btn-default"><i class="fa fa-home"></i></a>
+                <a href="@Url.Action("Index", "SeznamStudentov" )" class="btn btn-default">Seznam študentov</a>
+                <a href="#" class="btn btn-default">Osebni podatki</a>
             </div>
-            <!-- /.panel -->
         </div>
-        <!-- /.col-lg-4 -->
-
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading red">
-                    Podatki o šolanju
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                    <div class="form-group">
-                        <input type="number" class="form-control" placeholder="vpisna številka" value="63130164" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label>Vpisan v letnik</label>
-                        <select class="form-control" id="letnikUser" disabled>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Trenutno šolsko leto</label>
-                        <select class="form-control" id="solLetoUser" disabled>
-                            <option>2010/2011</option>
-                            <option>2011/2012</option>
-                            <option>2012/2013</option>
-                            <option>2013/2014</option>
-                            <option>2014/2015</option>
-                            <option>2015/2016</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Shrani podatke o novem šolanju"
-                               class="btn btn-danger btn-block disabled" id="shraniSolanjeUser">
-                    </div>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-4 -->
-
+        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-@*}
-    }*@
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading red">
+                        Osebni podatki
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Index", "UporabniskiPodatki", FormMethod.Post))
+                        {
+                            @Html.ValidationSummary(true)
+                            <form>
+                                @Html.TextBoxFor(m => m.idUporabnik, new { data_bind = "value: idUporabnik", @type = "hidden" })
+
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.ime, new { data_bind = "value: ime", @class = "form-control", @required = "required", @pattern = "[A-z]*", @placeholder = "ime" })
+                                    @Html.ValidationMessageFor(m => m.ime)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.priimek, new { data_bind = "value: priimek", @class = "form-control", @required = "required", @pattern = "[A-z]*", @placeholder = "priimek" })
+                                    @Html.ValidationMessageFor(m => m.priimek)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.mobi, new { data_bind = "value: mobi", @type = "tel", @class = "form-control", @required = "required", @pattern = @"\d{1,3}.\d{1,3}.\d{1,3}", @placeholder = "mobilni telefon (ex. 041 000 000)" })
+                                    @Html.ValidationMessageFor(m => m.mobi)
+                                </div>
+                                <div class="form-group">
+                                    <label class="desno20">Spol</label>
+                                    <label class="radio-inline">
+                                        @Html.RadioButton("spol", "M")moški
+                                    </label>
+                                    <label class="radio-inline">
+                                        @Html.RadioButton("spol", "Z")ženski
+                                    </label>
+                                </div>
+                                @if (User.IsInRole("referat") || User.IsInRole("profesor"))
+                                {
+                                    <div class="form-group">
+                                        <label class="desno20">Vloga</label>
+                                        <label class="radio-inline">
+                                            @Html.RadioButton("idVloge", "1")študent
+                                        </label>
+                                        <label class="radio-inline">
+                                            @Html.RadioButton("idVloge", "2")profesor
+                                        </label>
+                                        <label class="radio-inline">
+                                            @Html.RadioButton("idVloge", "3")referat
+                                        </label>
+                                    </div>
+                                }
+                                <div class="form-group">
+                                    <input type="submit" value="Shrani osebne podatke" class="btn btn-danger btn-block" id="shraniOsebne" name="poslji">
+                                </div>
+                            </form>
+                        }
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading red">
+                        Podatki o šolanju
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Index", "UporabniskiPodatki", FormMethod.Post))
+                        {
+                            @Html.ValidationSummary(true)
+                            <form>
+                                @Html.TextBoxFor(m => m.idUporabnik, new { data_bind = "value: idUporabnik", @type = "hidden" })
+
+                                @if (User.IsInRole("student") || User.IsInRole("profesor"))
+                                {
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.vpisnaStevilka, new { data_bind = "value: vpisnaStevilka", @type = "number", @class = "form-control", @placeholder = "vpisna številka", @pattern = "[0-9]+", @disabled = "disabled" })
+                                        @Html.ValidationMessageFor(m => m.vpisnaStevilka)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.letnikStudija, new { data_bind = "value: letnikStudija", @type = "number", @class = "form-control", @placeholder = "vpisan v letnik", @pattern = "[0-9]+", @disabled = "disabled" })
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Shrani podatke o novem šolanju" class="btn btn-danger btn-block" id="shraniSolanjeUser" name="poslji">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.vpisnaStevilka, new { data_bind = "value: vpisnaStevilka", @type = "number", @class = "form-control", @placeholder = "vpisna številka", @pattern = "[0-9]+" })
+                                        @Html.ValidationMessageFor(m => m.vpisnaStevilka)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.letnikStudija, new { data_bind = "value: letnikStudija", @type = "number", @class = "form-control", @placeholder = "vpisan v letnik", @pattern = "[0-9]+" })
+                                        @Html.ValidationMessageFor(m => m.letnikStudija)
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Shrani podatke o novem šolanju" class="btn btn-danger btn-block" id="shraniSolanjeUser" name="poslji">
+                                    </div>
+                                }
+                            </form>
+                        }
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+}

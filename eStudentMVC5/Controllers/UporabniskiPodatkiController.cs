@@ -35,15 +35,21 @@ namespace eStudentMVC5.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(uporabnik u)
+        public ActionResult Index(uporabnik u, string poslji)
         {
-            if (ModelState.IsValid)
-            {
-                try
+            try
                 {
                     if (u.idUporabnik != 0)
                     {
-                        db.Entry(u).State = System.Data.Entity.EntityState.Modified;
+                        uporabnik tmp;
+                        if (poslji.Equals("Shrani osebne podatke"))
+                        {
+                             tmp = PosodobiUporabnikaOsebno(db.uporabnik.Find(u.idUporabnik), u);
+                        }
+                        else
+                        {
+                            tmp = PosodobiUporabnikaSolanje(db.uporabnik.Find(u.idUporabnik), u);
+                        }
                         int uspeh = db.SaveChanges();
                     }
                     else
@@ -56,13 +62,24 @@ namespace eStudentMVC5.Controllers
                 {
                     Log.Error("Uporabnik ni bil posodobljen.");
                 }
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
-                return View(u);
-            }
             return RedirectToAction("Index");
+        }
+
+        public uporabnik PosodobiUporabnikaOsebno(uporabnik izBaze, uporabnik nov)
+        {
+            izBaze.ime = nov.ime;
+            izBaze.priimek = nov.priimek;
+            izBaze.mobi = nov.mobi;
+            izBaze.spol = nov.spol;
+            izBaze.vloga = nov.vloga;
+            return izBaze;
+        }
+
+        public uporabnik PosodobiUporabnikaSolanje(uporabnik izBaze, uporabnik nov)
+        {
+            izBaze.vpisnaStevilka = nov.vpisnaStevilka;
+            izBaze.letnikStudija = nov.letnikStudija;
+            return izBaze;
         }
     }
 }

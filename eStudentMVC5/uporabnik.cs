@@ -35,13 +35,12 @@ namespace eStudentMVC5
         [RegularExpression(@"^[A-z]*$", ErrorMessage = "Neveljaven priimek.")]
         public string priimek { get; set; }
 
-        [Required]
         [RegularExpression(@"^[\w\d-\.]+@([\w\d-]+\.)+[\w-]{2,4}$", ErrorMessage = "Neveljaven elektronski naslov.")]
         public string email { get; set; }
 
-        [Required]
         public string geslo { get; set; }
 
+        [Required]
         public string mobi { get; set; }
 
         [Required]
@@ -51,7 +50,6 @@ namespace eStudentMVC5
         [RegularExpression(@"^[123]{1}$", ErrorMessage = "Neveljaven letnik studija.")]
         public Nullable<int> letnikStudija { get; set; }
 
-        [Required]
         public System.DateTime datumRegistracije { get; set; }
 
         public System.DateTime zadnjiDostop { get; set; }

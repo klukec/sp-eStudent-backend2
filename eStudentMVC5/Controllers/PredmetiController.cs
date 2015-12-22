@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace eStudentMVC5.Controllers
 {
+    [Authorize]
     public class PredmetiController : Controller
     {
         estudentEntities db = new estudentEntities();
@@ -48,7 +49,6 @@ namespace eStudentMVC5.Controllers
                         db.Entry(p.predmetEdit).State = System.Data.Entity.EntityState.Modified;
                         int uspeh = db.SaveChanges();
                     }
-                    
                 }
                 catch
                 {

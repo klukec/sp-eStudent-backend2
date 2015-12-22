@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace eStudentMVC5.Controllers
 {
+    [Authorize]
     public class SeznamZaposlenihController : Controller
     {
         estudentEntities db = new estudentEntities();
