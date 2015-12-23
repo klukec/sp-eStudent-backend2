@@ -25,7 +25,7 @@ namespace eStudentMVC5.Controllers
                 {
                     uporabnik u = db.uporabnik.Find(idUporabnik);
                     return View(u);
-                }  
+                }
             }
             catch
             {
@@ -38,31 +38,39 @@ namespace eStudentMVC5.Controllers
         public ActionResult Index(uporabnik u, string poslji)
         {
             try
+            {
+                if (u.idUporabnik != 0)
                 {
-                    if (u.idUporabnik != 0)
+                    uporabnik tmp;
+                    if (poslji.Equals("Shrani osebne podatke"))
                     {
-                        uporabnik tmp;
-                        if (poslji.Equals("Shrani osebne podatke"))
+                        if (ModelState.IsValid)
                         {
-                             tmp = PosodobiUporabnikaOsebno(db.uporabnik.Find(u.idUporabnik), u);
+                            tmp = PosodobiUporabnikaOsebno(db.uporabnik.Find(u.idUporabnik), u);
                         }
                         else
                         {
-                            tmp = PosodobiUporabnikaSolanje(db.uporabnik.Find(u.idUporabnik), u);
+                            ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
+                            return View(u);
                         }
-                        int uspeh = db.SaveChanges();
                     }
                     else
                     {
-                        Log.Error("Zahtevan je bil vnos novega uporabnika.");
+                        tmp = PosodobiUporabnikaSolanje(db.uporabnik.Find(u.idUporabnik), u);
                     }
-
+                    int uspeh = db.SaveChanges();
                 }
-                catch
+                else
                 {
-                    Log.Error("Uporabnik ni bil posodobljen.");
+                    Log.Error("Zahtevan je bil vnos novega uporabnika.");
                 }
-            return RedirectToAction("Index");
+            }
+            catch
+            {
+                Log.Error("Uporabnik ni bil posodobljen.");
+            }
+            u = db.uporabnik.Find(u.idUporabnik);
+            return View(u);
         }
 
         public uporabnik PosodobiUporabnikaOsebno(uporabnik izBaze, uporabnik nov)
