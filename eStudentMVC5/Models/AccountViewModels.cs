@@ -47,7 +47,7 @@ namespace eStudentMVC5.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "zapomni se me")]
         public bool RememberMe { get; set; }
     }
 
