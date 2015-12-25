@@ -17,7 +17,7 @@ namespace eStudentMVC5.Controllers
         {
             try
             {
-                List<izpitnirok> izpitniRoki = (from s in db.izpitnirok select s).ToList();
+                List<izpitnirok> izpitniRoki = (from s in db.izpitnirok where s.zakljucen == true select s).ToList();
                 
                 List<ZakljuceniRokiModel> m = new List<ZakljuceniRokiModel>();
                 foreach(izpitnirok i in izpitniRoki) {
