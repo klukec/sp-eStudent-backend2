@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eStudentMVC5.Models;
+using eStudentMVC5.Business;
 using System.Diagnostics;
 
 namespace eStudentMVC5.Controllers
@@ -18,13 +19,13 @@ namespace eStudentMVC5.Controllers
         {
             if (idPredmet.Length == 0)
             {
-                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = new predmet() };
+                var model = new PredmetiModel { seznamPredmetov = BusinessLogic.vrniVsePredmete(), predmetEdit = new predmet() };
                 return View(model);
             }
             else
             {
                 predmet p = db.predmet.Find(Int32.Parse(idPredmet));
-                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = p };
+                var model = new PredmetiModel { seznamPredmetov = BusinessLogic.vrniVsePredmete(), predmetEdit = p };
                 return View(model);
             }  
         }
@@ -59,17 +60,10 @@ namespace eStudentMVC5.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
                 Log.Debug("Predmetu je bilo nastavljeno " + p.predmetEdit.stKreditnih + " kreditnih tock.");
-                var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = p.predmetEdit };
+                var model = new PredmetiModel { seznamPredmetov = BusinessLogic.vrniVsePredmete(), predmetEdit = p.predmetEdit };
                 return View(model);
             }
             return RedirectToAction("Index");
-        }
-
-        private List<predmet> vrniVsePredmete()
-        {
-            var predmeti = from s in db.predmet select s;
-            List<predmet> predmetiR = predmeti.ToList();
-            return predmetiR;
         }
     }
 }
