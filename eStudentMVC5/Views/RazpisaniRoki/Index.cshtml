@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Razpisani izpitni roki";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Razpisani izpitni roki</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading red">
+                Razpisani izpitni roki
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive table-bordered">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Predmet</th>
+                                <th>Profesor</th>
+                                <th>Izpitni rok</th>
+                                <th>Datum</th>
+                                <th>Prostor</th>
+                                <th>Komentar</th>
+                                <th>Funkcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var s in @ViewBag.izpitniRoki)
+                            {
+                                <tr>
+                                    <td>@s.predmet.imePredmeta</td>
+                                    <td>@s.predmet.uporabnik.ime @s.predmet.uporabnik.priimek</td>
+                                    <td>@s.stRoka</td>
+                                    <td>@s.datum</td>
+                                    <td>@s.prostor</td>
+                                    <td>@s.komentar</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-sm disabled">Urejanje</button>
+                                        <button type="button" class="btn btn-danger btn-sm disabled">Brisanje</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

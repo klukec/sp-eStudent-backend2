@@ -36,74 +36,23 @@
                                 <th>#</th>
                                 <th>Predmet</th>
                                 <th>Ocenil</th>
-                                <th>Letnik</th>
                                 <th>Datum</th>
-                                <th>Polaganje</th>
                                 <th>KT</th>
                                 <th>Ocena</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Diskretne strukture</td>
-                                <td>Gašper Fijavž</td>
-                                <td>1. letnik</td>
-                                <td>20.1.2014</td>
-                                <td>1.</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
+                            @foreach (var s in @ViewBag.opravljeniPredmeti)
+                            {
+                                <tr>
+                                    <td>@ViewBag.opravljeniPredmeti.IndexOf(s)</td>
+                                    <td>@s.predmet.imePredmeta</td>
+                                    <td>@s.predmet.uporabnik.ime @s.predmet.uporabnik.priimek</td>
+                                    <td>@s.izpitnirok.datum</td>
+                                    <td>@s.predmet.stKreditnih</td>
+                                    <td>@s.ocena1</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -130,9 +79,9 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>20</td>
-                                <td>120</td>
-                                <td>8,5</td>
+                                <td>@ViewBag.stOpravljenih</td>
+                                <td>@ViewBag.sumKreditne</td>
+                                <td>@ViewBag.povprecje</td>
                             </tr>
                         </tbody>
                     </table>
