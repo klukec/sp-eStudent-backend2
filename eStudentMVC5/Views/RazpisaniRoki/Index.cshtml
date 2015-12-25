@@ -41,10 +41,29 @@
                                     <td>@s.datum</td>
                                     <td>@s.prostor</td>
                                     <td>@s.komentar</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success btn-sm disabled">Urejanje</button>
-                                        <button type="button" class="btn btn-danger btn-sm disabled">Brisanje</button>
-                                    </td>
+
+                                    @if (User.IsInRole("referat") || (User.IsInRole("profesor") && User.Identity.Name.Equals(@s.predmet.uporabnik.email)))
+                                    {
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-sm">
+                                                @Html.ActionLink("Urejanje", "Index", "RazpisiRok", new { idRoka = @s.idIzpitniRok }, null)
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm">
+                                                @Html.ActionLink("Brisanje", "IzbrisiRok", "RazpisaniRoki", new { idRoka = @s.idIzpitniRok }, null)
+                                            </button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <button type="button" class="btn btn-success btn-sm disabled">
+                                                @Html.ActionLink("Urejanje", "Index", "RazpisiRok", new { idRoka = @s.idIzpitniRok }, null)
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm disabled">
+                                                @Html.ActionLink("Brisanje", "IzbrisiRok", "RazpisaniRoki", new { idRoka = @s.idIzpitniRok }, null)
+                                            </button>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

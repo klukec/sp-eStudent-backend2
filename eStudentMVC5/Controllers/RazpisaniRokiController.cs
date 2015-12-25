@@ -26,5 +26,20 @@ namespace eStudentMVC5.Controllers
 
             return View();
         }
+
+        public ActionResult IzbrisiRok(int idRoka)
+        {
+            try
+            {
+                izpitnirok temp = db.izpitnirok.Find(idRoka);
+                db.izpitnirok.Remove(temp);
+                db.SaveChanges();
+            }
+            catch
+            {
+                Log.Error("Napaka pri izbrisu izpitnega roka.");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
