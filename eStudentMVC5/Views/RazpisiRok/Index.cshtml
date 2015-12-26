@@ -19,6 +19,8 @@
                     @Html.ValidationSummary(true)
                     <form role="form">
                         <div class="form-group">
+                            @Html.TextBoxFor(m => m.izpitniRok.idIzpitniRok, new { data_bind = "value: idIzpitniRok", @type = "hidden" })
+
                             <label>Predmet</label>
                             @Html.DropDownListFor(m => m.izpitniRok.idPredmeta, Model.seznamPredmetov, "Izberite predmet", new { @class = "form-control", @required = "required" })
                         </div>
@@ -63,6 +65,7 @@
                 @using (Html.BeginForm("Index", "RazpisiRok", FormMethod.Post))
                 {
                     @Html.ValidationSummary(true)
+                    @Html.TextBoxFor(m => m.izpitniRok.idIzpitniRok, new { data_bind = "value: idIzpitniRok", @type = "hidden" })
                     <form>
                         <div class="table-responsive table-bordered">
                             <table class="table">
@@ -75,17 +78,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var s in Model.seznamOcenVsiUporabniki)
+                                    @for (var i=0; i < Model.seznamOcenVsiUporabniki.Count; i++)
                                     {
                                         <tr>
-                                            <td>@s.uporabnik.vpisnaStevilka</td>
-                                            <td>@s.uporabnik.ime @s.uporabnik.priimek</td>
-                                            <td>
-                                                @Html.TextBoxFor(m => s.sTock, new { data_bind = "value: stTock", @type = "number", @class = "form-control", @placeholder = "točke", @required = "required" })
-                                            </td>
-                                            <td>
-                                                @Html.TextBoxFor(m => s.ocena1, new { data_bind = "value: ocena", @type = "number", @class = "form-control", @placeholder = "ocena", @required = "required" })
-                                            </td>
+                                            @Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].idStudenta, new { data_bind = "value: idUporabnik", @type = "hidden" })
+                                            @Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].idOcena, new { data_bind = "value: idOcena", @type = "hidden" })
+                                            @Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].idIzpitnegaRoka, new { data_bind = "value: idIzpitnegaRoka", @type = "hidden" })
+                                            @Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].idPredmeta, new { data_bind = "value: idIzpitnegaRoka", @type = "hidden" })
+                                            <td>@Html.DisplayFor(m => Model.seznamOcenVsiUporabniki[i].uporabnik.vpisnaStevilka)</td>
+                                            <td>@Html.DisplayFor(m => Model.seznamOcenVsiUporabniki[i].uporabnik.ime) @Html.DisplayFor(m => Model.seznamOcenVsiUporabniki[i].uporabnik.priimek)</td>
+                                            <td>@Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].sTock, new { data_bind = "value: sTock", @name = "sTock", @type = "number", @class = "form-control", @placeholder = "točke", @required = "required" })</td>
+                                            <td>@Html.TextBoxFor(m => Model.seznamOcenVsiUporabniki[i].ocena1, new { data_bind = "value: ocena", @type = "number", @class = "form-control", @placeholder = "ocena", @required = "required" })</td>
                                         </tr>
                                     }
                                 </tbody>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eStudentMVC5.Models;
+using eStudentMVC5.Business;
 
 namespace eStudentMVC5.Controllers
 {
@@ -33,44 +34,71 @@ namespace eStudentMVC5.Controllers
                 {
                     izpitnirok p = db.izpitnirok.Find(idRoka);
                     return View(new RazpisiRokModel(p));
-                } catch {
+                }
+                catch
+                {
                     Log.Error("Izpitnega roka ni bilo mogoce pridobiti iz baze.");
                     return View(new RazpisiRokModel());
                 }
-            }  
+            }
         }
 
         [HttpPost]
         public ActionResult Index(RazpisiRokModel p)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                // dodajam nov izpitni rok
+                if (p.izpitniRok.idIzpitniRok == 0)
                 {
-                    if (p.izpitniRok.idIzpitniRok == 0)
+                    db.izpitnirok.Add(p.izpitniRok);
+                    int uspeh = db.SaveChanges();
+                    ModelState.Clear();
+                }
+                else
+                {
+                    // slo je za vnos ocen obstojecemu izpitnemu roku, postimaj samo to
+                    if (p.izpitniRok.komentar == null)
                     {
-                        db.izpitnirok.Add(p.izpitniRok);
-                        int uspeh = db.SaveChanges();
-                        ModelState.Clear();
+                        try
+                        {
+                            foreach (ocena o in p.seznamOcenVsiUporabniki)
+                            {
+                                // gre za novo oceno, vpisi jo v bazo
+                                if (o.idOcena == 0)
+                                {
+                                    izpitnirok iTmp = db.izpitnirok.Find(p.izpitniRok.idIzpitniRok);
+                                    ocena nesto = new ocena(o, iTmp);
+                                    db.ocena.Add(nesto);
+                                    int uspehOcenaTmp = db.SaveChanges();
+                                }
+                                // popravljas staro oceno
+                                else
+                                {
+                                    db.Entry(o).State = System.Data.Entity.EntityState.Modified;
+                                    int uspehOcenaTmp = db.SaveChanges();
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            Log.Error("Posodabljanje ocen v bazi ni uspelo.");
+                        }
                     }
+                    // spreminjali so se podatki o izpitnem roku
                     else
                     {
-                        // spremenili so se podatki o izpitnem roku ali / in vnesle so se ocene
                         db.Entry(p.izpitniRok).State = System.Data.Entity.EntityState.Modified;
                         int uspeh = db.SaveChanges();
                     }
                 }
-                catch
-                {
-                    Log.Error("Izpitni rok ni bil vstavljen v bazo.");
-                }
             }
-            else
+            catch
             {
-                ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
-                return View(p);
+                Log.Error("Izpitni rok ni bil vstavljen v bazo.");
             }
-            return RedirectToAction("Index");
+            return Redirect("RazpisaniRoki");
         }
+
     }
 }

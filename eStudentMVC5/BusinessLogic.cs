@@ -11,6 +11,19 @@ namespace eStudentMVC5.Business
     {
         private static estudentEntities db = new estudentEntities();
 
+        public static uporabnik vrniUporabnika(int id)
+        {
+            try
+            {
+                uporabnik u = db.uporabnik.Find(id);
+                return u;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static List<predmet> vrniVsePredmete()
         {
             var predmeti = from s in db.predmet select s;
@@ -20,17 +33,24 @@ namespace eStudentMVC5.Business
 
         public static IEnumerable<SelectListItem> VrniVsePredmete()
         {
-            var predmeti = from s in db.predmet select s;
-            List<predmet> predmetiR = predmeti.ToList();
+            try
+            {
+                var predmeti = from s in db.predmet select s;
+                List<predmet> predmetiR = predmeti.ToList();
 
-            IEnumerable<SelectListItem> selectPredmet = from c in predmetiR
-                                                        select new SelectListItem
-                                                        {
-                                                            Selected = (c.idPredmet == 0),
-                                                            Text = c.imePredmeta,
-                                                            Value = c.idPredmet.ToString()
-                                                        };
-            return selectPredmet;
+                IEnumerable<SelectListItem> selectPredmet = from c in predmetiR
+                                                            select new SelectListItem
+                                                            {
+                                                                Selected = (c.idPredmet == 0),
+                                                                Text = c.imePredmeta,
+                                                                Value = c.idPredmet.ToString()
+                                                            };
+                return selectPredmet;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static List<uporabnik> vrniVseStudente()
@@ -81,29 +101,6 @@ namespace eStudentMVC5.Business
             return neocenjeniU;
         }
 
-        public static List<ocena> vrniSeznamOcenVsiUporabniki(izpitnirok i)
-        {
-            List<uporabnik> vsiStudentje = vrniVseStudente();
-            List<ocena> ocene = new List<ocena>();
-            foreach (uporabnik u in vsiStudentje)
-            {
-                try
-                {
-                    ocena ocenaTmp = (from s in db.ocena where (s.idStudenta == u.idUporabnik && s.idIzpitnegaRoka == i.idIzpitniRok) select s).ToList().First();
-                    ocene.Add(ocenaTmp);
-                }
-                catch
-                {
-                    // Uporabnik se nima ocene - kreiraj prazno oceno za uporabnika
-                    ocena ocenaTmp = new ocena();
-                    ocenaTmp.idStudenta = u.idUporabnik;
-                    ocenaTmp.uporabnik = u;
-                    ocenaTmp.idPredmeta = i.idPredmeta;
-                    ocenaTmp.idIzpitnegaRoka = i.idIzpitniRok;
-                    ocene.Add(ocenaTmp);
-                }
-            }
-            return ocene;
-        }
+        
     }
 }

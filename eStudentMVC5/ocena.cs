@@ -12,6 +12,7 @@ namespace eStudentMVC5
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using eStudentMVC5.Business;
     
     public partial class ocena
     {
@@ -31,11 +32,36 @@ namespace eStudentMVC5
         public int sTock { get; set; }
 
         [Required]
-        [Range(1, 10, ErrorMessage = "Stevilka med 1 in 10.")]
+        [Range(0, 10, ErrorMessage = "Stevilka med 1 in 10.")]
         public int ocena1 { get; set; }
     
         public virtual izpitnirok izpitnirok { get; set; }
         public virtual predmet predmet { get; set; }
         public virtual uporabnik uporabnik { get; set; }
+
+        public ocena(izpitnirok i, int idStudenta, int tocke, int ocena)
+        {
+            this.idStudenta = idStudenta;
+            this.uporabnik = BusinessLogic.vrniUporabnika(idStudenta);
+            this.idPredmeta = i.idPredmeta;
+            this.predmet = i.predmet;
+            this.idIzpitnegaRoka = i.idIzpitniRok;
+            this.izpitnirok = i;
+            this.sTock = tocke;
+            this.ocena1 = ocena;
+        }
+
+        public ocena(ocena stara, izpitnirok iTmp)
+        {
+            this.idStudenta = stara.idStudenta;
+            this.idPredmeta = iTmp.idPredmeta;
+            this.idIzpitnegaRoka = iTmp.idIzpitniRok;
+            this.sTock = stara.sTock;
+            this.ocena1 = stara.ocena1;
+        }
+
+        public ocena()
+        { }
+
     }
 }

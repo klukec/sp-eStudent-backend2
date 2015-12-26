@@ -26,14 +26,41 @@ namespace eStudentMVC5.Models
         {
             this.izpitniRok = new izpitnirok();
             this.izpitniRok.stRoka = 1;
-            this.seznamOcenVsiUporabniki = BusinessLogic.vrniSeznamOcenVsiUporabniki(this.izpitniRok);
+            this.seznamOcenVsiUporabniki = vrniSeznamOcenVsiUporabniki(this.izpitniRok);
         }
 
         // Ce gre za izbrani izpitni rok.
         public RazpisiRokModel(izpitnirok i)
         {
             this.izpitniRok = i;
-            this.seznamOcenVsiUporabniki = BusinessLogic.vrniSeznamOcenVsiUporabniki(i);
+            this.seznamOcenVsiUporabniki = vrniSeznamOcenVsiUporabniki(i);
+        }
+
+        public List<ocena> vrniSeznamOcenVsiUporabniki(izpitnirok i)
+        {
+            List<uporabnik> vsiStudentje = BusinessLogic.vrniVseStudente();
+            List<ocena> ocene = new List<ocena>();
+            foreach (uporabnik u in vsiStudentje)
+            {
+                try
+                {
+                    ocena ocenaTmp = (from s in db.ocena where (s.idStudenta == u.idUporabnik && s.idIzpitnegaRoka == i.idIzpitniRok) select s).ToList().First();
+                    ocene.Add(ocenaTmp);
+                }
+                catch
+                {
+                    // Uporabnik se nima ocene - kreiraj prazno oceno za uporabnika
+                    ocena ocenaTmp = new ocena();
+                    ocenaTmp.idStudenta = u.idUporabnik;
+                    ocenaTmp.uporabnik = u;
+                    ocenaTmp.idPredmeta = i.idPredmeta;
+                    ocenaTmp.predmet = i.predmet;
+                    ocenaTmp.idIzpitnegaRoka = i.idIzpitniRok;
+                    ocenaTmp.izpitnirok = i;
+                    ocene.Add(ocenaTmp);
+                }
+            }
+            return ocene;
         }
 
     }
