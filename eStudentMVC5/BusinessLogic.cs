@@ -100,6 +100,51 @@ namespace eStudentMVC5.Business
             }
             return neocenjeniU;
         }
+
+        public static int stIzpitnihRokov()
+        {
+            List<izpitnirok> roki = (from s in db.izpitnirok select s).ToList();
+            return roki.Count();
+        }
+
+        public static int stNezakljucenihRokov()
+        {
+            List<izpitnirok> roki = (from s in db.izpitnirok where s.zakljucen == false select s).ToList();
+            return roki.Count();
+        }
+
+        public static int stVsehStudentov()
+        {
+            List<uporabnik> studenti = vrniVseStudente();
+            return studenti.Count();
+        }
+
+        public static int stPredmetov()
+        {
+            List<predmet> predmeti = (from s in db.predmet select s).ToList();
+            return predmeti.Count();
+        }
+
+        public static int stStudentovZakljucilo()
+        {
+            int vsiPredmeti = stPredmetov();
+
+            int stStudFinish = 0;
+            List<uporabnik> vsiStudentje = vrniVseStudente();
+            foreach (uporabnik u in vsiStudentje)
+            {
+                List<ocena> opravljeniPredmeti = (from s in db.ocena where (s.ocena1 > 5 && s.idStudenta == u.idUporabnik) select s).ToList();
+                int stOpravljenih = opravljeniPredmeti.Count();
+                if (stOpravljenih == vsiPredmeti)
+                    stStudFinish++;
+            }
+            return stStudFinish;
+        }
+
+        public static int stStudentovNezakljucilo()
+        {
+            return stVsehStudentov() - stStudentovZakljucilo();
+        }
   
     }
 }

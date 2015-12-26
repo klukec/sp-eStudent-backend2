@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eStudentMVC5.Business;
 
 namespace eStudentMVC5.Controllers
 {
@@ -11,20 +12,10 @@ namespace eStudentMVC5.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewData["stIzpitnihRokov"] = BusinessLogic.stIzpitnihRokov();
+            ViewData["vnosOcen"] = BusinessLogic.stNezakljucenihRokov();
+            ViewData["opravili"] = BusinessLogic.stStudentovZakljucilo();
+            ViewData["neopravili"] = BusinessLogic.stStudentovNezakljucilo();
             return View();
         }
     }
