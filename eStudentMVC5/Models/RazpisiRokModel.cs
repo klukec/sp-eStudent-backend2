@@ -11,20 +11,27 @@ namespace eStudentMVC5.Models
         public izpitnirok izpitniRok { get; set; }
         public List<predmet> seznamPredmetov { get; set; }
         public List<uporabnik> seznamStudentov { get; set; }
-        public List<ocena> ocene { get; set; }
+        public List<ocena> seznamOcen { get; set; }
+        public List<uporabnik> seznamNeocenjenih { get; set; }
 
+        // Ustvaris nov objekt, ko gre za prazen (nov) rok.
+        public RazpisiRokModel()
+        {
+            this.izpitniRok = new izpitnirok();
+            this.izpitniRok.stRoka = 1;
+            this.seznamPredmetov = BusinessLogic.vrniVsePredmete();
+            this.seznamStudentov = BusinessLogic.vrniVseStudente();
+        }
+
+        // Ce gre za izbrani izpitni rok.
         public RazpisiRokModel(izpitnirok i)
         {
             this.izpitniRok = i;
             this.seznamPredmetov = BusinessLogic.vrniVsePredmete();
             this.seznamStudentov = BusinessLogic.vrniVseStudente();
-            this.ocene = BusinessLogic.vrniOceneRok(i);
+            this.seznamOcen = BusinessLogic.vrniOceneRok(i);
+            this.seznamNeocenjenih = BusinessLogic.vrniNeocenjeneStudente(i);
         }
 
-        public RazpisiRokModel()
-        {
-            this.seznamPredmetov = BusinessLogic.vrniVsePredmete();
-            this.seznamStudentov = BusinessLogic.vrniVseStudente();
-        }
     }
 }

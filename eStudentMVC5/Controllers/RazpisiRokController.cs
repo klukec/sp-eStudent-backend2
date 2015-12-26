@@ -10,6 +10,10 @@ namespace eStudentMVC5.Controllers
     // sam izracunaj stevilko izpitnega rok
     // glede ocen boms moral malo prilagodit konstruktor
 
+    // Ce je rok prazen, studentov sploh ne potrebujemo. St. roka je 1. Pridobi seznam vseh predmetov.
+    // Ce gre za izbrani rok in se ni zakljucen, pridobi tocno dolocen rok, seznam vseh predmetov, seznam vseh studentov, nic ocen.
+    // Ce gre za rok, ki je zakljucen, pridobi tocno dolocen rok, vse ocene, ki so že vnesese in študente, ki še nimajo vnesene ocene.
+
 
     [Authorize]
     public class RazpisiRokController : Controller
@@ -31,7 +35,7 @@ namespace eStudentMVC5.Controllers
                     return View(new RazpisiRokModel(p));
                 } catch {
                     Log.Error("Izpitnega roka ni bilo mogoce pridobiti iz baze.");
-                    return View(new izpitnirok());
+                    return View(new RazpisiRokModel());
                 }
             }  
         }
@@ -39,7 +43,7 @@ namespace eStudentMVC5.Controllers
         [HttpPost]
         public ActionResult Index(RazpisiRokModel p)
         {
-            if (ModelState.IsValid) // Ali ustreza konstraintom v modelu?
+            if (ModelState.IsValid)
             {
                 try
                 {
@@ -51,6 +55,7 @@ namespace eStudentMVC5.Controllers
                     }
                     else
                     {
+                        // spremenili so se podatki o izpitnem roku ali / in vnesle so se ocene
                         db.Entry(p.izpitniRok).State = System.Data.Entity.EntityState.Modified;
                         int uspeh = db.SaveChanges();
                     }
