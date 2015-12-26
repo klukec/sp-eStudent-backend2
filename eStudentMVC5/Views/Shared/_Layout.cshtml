@@ -23,11 +23,9 @@
         </div>
         <!-- /.navbar-header -->
 
-        <ul class="nav navbar-top-links navbar-right">
-            <li><a href="@Url.Action("Index", "UporabniskiPodatki")"><i class="fa fa-user fa-fw"></i></a></li>
-            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i></a></li>
-            <!-- /.dropdown -->
-        </ul>
+        <section id="login">
+            @Html.Partial("_LoginPartial")
+        </section>
         <!-- /.navbar-top-links -->
 
         <div class="navbar-default sidebar" role="navigation">
@@ -87,10 +85,6 @@
     </nav>
 
     <div id="page-wrapper">
-        <section id="login">
-            @Html.Partial("_LoginPartial")
-        </section>
-
         @RenderBody()
     </div>
 

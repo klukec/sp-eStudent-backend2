@@ -300,6 +300,7 @@
     <Content Include="Views\RazpisaniRoki\Index.cshtml" />
     <Content Include="Views\RazpisiRok\Index.cshtml" />
     <Content Include="Views\ZakljuceniRoki\Index.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial_original.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

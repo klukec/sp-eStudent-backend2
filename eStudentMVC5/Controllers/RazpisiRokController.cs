@@ -8,14 +8,6 @@ using eStudentMVC5.Business;
 
 namespace eStudentMVC5.Controllers
 {
-    // sam izracunaj stevilko izpitnega rok
-    // glede ocen boms moral malo prilagodit konstruktor
-
-    // Ce je rok prazen, studentov sploh ne potrebujemo. St. roka je 1. Pridobi seznam vseh predmetov.
-    // Ce gre za izbrani rok in se ni zakljucen, pridobi tocno dolocen rok, seznam vseh predmetov, seznam vseh studentov, nic ocen.
-    // Ce gre za rok, ki je zakljucen, pridobi tocno dolocen rok, vse ocene, ki so že vnesese in študente, ki še nimajo vnesene ocene.
-
-
     [Authorize]
     public class RazpisiRokController : Controller
     {
@@ -51,6 +43,7 @@ namespace eStudentMVC5.Controllers
                 // dodajam nov izpitni rok
                 if (p.izpitniRok.idIzpitniRok == 0)
                 {
+                    p.izpitniRok.zakljucen = false;
                     db.izpitnirok.Add(p.izpitniRok);
                     int uspeh = db.SaveChanges();
                     ModelState.Clear();
@@ -62,12 +55,12 @@ namespace eStudentMVC5.Controllers
                     {
                         try
                         {
+                            izpitnirok iTmp = db.izpitnirok.Find(p.izpitniRok.idIzpitniRok);
                             foreach (ocena o in p.seznamOcenVsiUporabniki)
                             {
                                 // gre za novo oceno, vpisi jo v bazo
                                 if (o.idOcena == 0)
                                 {
-                                    izpitnirok iTmp = db.izpitnirok.Find(p.izpitniRok.idIzpitniRok);
                                     ocena nesto = new ocena(o, iTmp);
                                     db.ocena.Add(nesto);
                                     int uspehOcenaTmp = db.SaveChanges();
@@ -79,6 +72,9 @@ namespace eStudentMVC5.Controllers
                                     int uspehOcenaTmp = db.SaveChanges();
                                 }
                             }
+                            iTmp.zakljucen = true;
+                            db.Entry(iTmp).State = System.Data.Entity.EntityState.Modified;
+                            int uspehZakljucen = db.SaveChanges();
                         }
                         catch
                         {
@@ -99,6 +95,5 @@ namespace eStudentMVC5.Controllers
             }
             return Redirect("RazpisaniRoki");
         }
-
     }
 }

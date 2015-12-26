@@ -100,7 +100,6 @@ namespace eStudentMVC5.Business
             }
             return neocenjeniU;
         }
-
-        
+  
     }
 }
