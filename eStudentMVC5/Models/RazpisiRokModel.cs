@@ -10,9 +10,7 @@ namespace eStudentMVC5.Models
     {
         public izpitnirok izpitniRok { get; set; }
         public List<predmet> seznamPredmetov { get; set; }
-        public List<uporabnik> seznamStudentov { get; set; }
-        public List<ocena> seznamOcen { get; set; }
-        public List<uporabnik> seznamNeocenjenih { get; set; }
+        public List<ocena> seznamOcenVsiUporabniki { get; set; }
 
         // Ustvaris nov objekt, ko gre za prazen (nov) rok.
         public RazpisiRokModel()
@@ -20,7 +18,7 @@ namespace eStudentMVC5.Models
             this.izpitniRok = new izpitnirok();
             this.izpitniRok.stRoka = 1;
             this.seznamPredmetov = BusinessLogic.vrniVsePredmete();
-            this.seznamStudentov = BusinessLogic.vrniVseStudente();
+            this.seznamOcenVsiUporabniki = BusinessLogic.vrniSeznamOcenVsiUporabniki(this.izpitniRok);
         }
 
         // Ce gre za izbrani izpitni rok.
@@ -28,9 +26,7 @@ namespace eStudentMVC5.Models
         {
             this.izpitniRok = i;
             this.seznamPredmetov = BusinessLogic.vrniVsePredmete();
-            this.seznamStudentov = BusinessLogic.vrniVseStudente();
-            this.seznamOcen = BusinessLogic.vrniOceneRok(i);
-            this.seznamNeocenjenih = BusinessLogic.vrniNeocenjeneStudente(i);
+            this.seznamOcenVsiUporabniki = BusinessLogic.vrniSeznamOcenVsiUporabniki(i);
         }
 
     }

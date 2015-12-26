@@ -57,11 +57,36 @@ namespace eStudentMVC5.Business
             List<int> neocenjeni = differenceQuery.ToList();
 
             List<uporabnik> neocenjeniU = new List<uporabnik>();
-            foreach(int u in neocenjeni) {
+            foreach (int u in neocenjeni)
+            {
                 var usr = from s in db.uporabnik where s.idUporabnik == u select s;
                 neocenjeniU.Add((uporabnik)usr);
             }
             return neocenjeniU;
+        }
+
+        public static List<ocena> vrniSeznamOcenVsiUporabniki(izpitnirok i)
+        {
+            List<uporabnik> vsiStudentje = vrniVseStudente();
+            List<ocena> ocene = new List<ocena>();
+            foreach (uporabnik u in vsiStudentje)
+            {
+                try
+                {
+                    ocena ocenaTmp = (from s in db.ocena where (s.idStudenta == u.idUporabnik && s.idIzpitnegaRoka == i.idIzpitniRok) select s).ToList().First();
+                    ocene.Add(ocenaTmp);
+                }
+                catch
+                {
+                    // Uporabnik se nima ocene - kreiraj prazno oceno za uporabnika
+                    ocena ocenaTmp = new ocena();
+                    ocenaTmp.idStudenta = u.idUporabnik;
+                    ocenaTmp.idPredmeta = i.idPredmeta;
+                    ocenaTmp.idIzpitnegaRoka = i.idIzpitniRok;
+                    ocene.Add(ocenaTmp);
+                }
+            }
+            return ocene;
         }
     }
 }
