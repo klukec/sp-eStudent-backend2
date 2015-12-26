@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace eStudentMVC5.Business
 {
@@ -15,6 +16,21 @@ namespace eStudentMVC5.Business
             var predmeti = from s in db.predmet select s;
             List<predmet> predmetiR = predmeti.ToList();
             return predmetiR;
+        }
+
+        public static IEnumerable<SelectListItem> VrniVsePredmete()
+        {
+            var predmeti = from s in db.predmet select s;
+            List<predmet> predmetiR = predmeti.ToList();
+
+            IEnumerable<SelectListItem> selectPredmet = from c in predmetiR
+                                                        select new SelectListItem
+                                                        {
+                                                            Selected = (c.idPredmet == 0),
+                                                            Text = c.imePredmeta,
+                                                            Value = c.idPredmet.ToString()
+                                                        };
+            return selectPredmet;
         }
 
         public static List<uporabnik> vrniVseStudente()
@@ -81,6 +97,7 @@ namespace eStudentMVC5.Business
                     // Uporabnik se nima ocene - kreiraj prazno oceno za uporabnika
                     ocena ocenaTmp = new ocena();
                     ocenaTmp.idStudenta = u.idUporabnik;
+                    ocenaTmp.uporabnik = u;
                     ocenaTmp.idPredmeta = i.idPredmeta;
                     ocenaTmp.idIzpitnegaRoka = i.idIzpitniRok;
                     ocene.Add(ocenaTmp);

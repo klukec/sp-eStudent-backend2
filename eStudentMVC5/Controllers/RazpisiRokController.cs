@@ -68,7 +68,7 @@ namespace eStudentMVC5.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Odpravite napake v obrazcu.");
-                return View(new RazpisiRokModel(p.izpitniRok));
+                return View(p);
             }
             return RedirectToAction("Index");
         }
