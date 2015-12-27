@@ -12,6 +12,7 @@ namespace eStudentMVC5.Controllers
         estudentEntities db = new estudentEntities();
 
         // GET: SeznamZaposlenih
+        [OutputCache(CacheProfile = "CacheEstudent")]
         public ActionResult Index()
         {
             var employees = from s in db.uporabnik where !s.idVloge.Equals(1) select s;

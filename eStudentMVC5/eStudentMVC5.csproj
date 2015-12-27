@@ -173,6 +173,7 @@
     <Compile Include="BusinessLogic.cs" />
     <Compile Include="Controllers\RazpisaniRokiController.cs" />
     <Compile Include="Controllers\RazpisiRokController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UporabniskiPodatkiController.cs" />
     <Compile Include="Controllers\ZakljuceniRokiController.cs" />
     <Compile Include="Log.cs" />
@@ -314,6 +315,7 @@
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Logger\" />
     <Folder Include="Views\PredmetiModel\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

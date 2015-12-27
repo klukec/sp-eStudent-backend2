@@ -24,11 +24,23 @@ namespace eStudentMVC5.Business
             }
         }
 
-        public static List<predmet> vrniVsePredmete()
+        public static List<uporabnik> vrniVseStudente()
         {
-            var predmeti = from s in db.predmet select s;
-            List<predmet> predmetiR = predmeti.ToList();
-            return predmetiR;
+            var studenti = from s in db.uporabnik where s.idVloge == 1 select s;
+            List<uporabnik> studentiR = studenti.ToList();
+            return studentiR;
+        }
+
+        public static List<int> vrniVseIdStudentov()
+        {
+            var studenti = from s in db.uporabnik
+                           where s.idVloge == 1
+                           select new
+                               {
+                                   idUporabnika = s.idUporabnik
+                               };
+            List<int> studentiR = studenti.AsEnumerable().Cast<int>().ToList();
+            return studentiR;
         }
 
         public static IEnumerable<SelectListItem> VrniVsePredmete()
@@ -51,25 +63,6 @@ namespace eStudentMVC5.Business
             {
                 return null;
             }
-        }
-
-        public static List<uporabnik> vrniVseStudente()
-        {
-            var studenti = from s in db.uporabnik where s.idVloge == 1 select s;
-            List<uporabnik> studentiR = studenti.ToList();
-            return studentiR;
-        }
-
-        public static List<int> vrniVseIdStudentov()
-        {
-            var studenti = from s in db.uporabnik
-                           where s.idVloge == 1
-                           select new
-                               {
-                                   idUporabnika = s.idUporabnik
-                               };
-            List<int> studentiR = studenti.AsEnumerable().Cast<int>().ToList();
-            return studentiR;
         }
 
         public static List<ocena> vrniOceneRok(izpitnirok i)

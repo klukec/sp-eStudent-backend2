@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace eStudentMVC5.Controllers
 {
@@ -12,6 +13,8 @@ namespace eStudentMVC5.Controllers
         estudentEntities db = new estudentEntities();
 
         // GET: Indeks
+        // http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs
+        [OutputCache(Duration = 30, VaryByParam = "none", Location = OutputCacheLocation.Client, NoStore = true)]
         public ActionResult Index()
         {
             try
