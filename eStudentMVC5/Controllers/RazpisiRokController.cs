@@ -8,6 +8,7 @@ using eStudentMVC5.Business;
 
 namespace eStudentMVC5.Controllers
 {
+    //[Authorize(Roles = "referat")]
     [Authorize]
     public class RazpisiRokController : Controller
     {

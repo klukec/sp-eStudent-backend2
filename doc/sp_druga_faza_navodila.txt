@@ -1,0 +1,5 @@
+selenium testiranje: http://www.seleniumhq.org/
+banchmarking: Jmeter
+
+Cashing na dveh nivojih: web server potvikat in bazo
+Performanèni test -> graf, config fajle zravn

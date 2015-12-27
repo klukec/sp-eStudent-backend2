@@ -12,6 +12,7 @@ namespace eStudentMVC5
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Newtonsoft.Json;
     
     public partial class uporabnik
     {
@@ -55,10 +56,17 @@ namespace eStudentMVC5
         public System.DateTime zadnjiDostop { get; set; }
 
         public int idVloge { get; set; }
-    
+
+        [JsonIgnore]
         public virtual ICollection<ocena> ocena { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<predmet> predmet { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<studentpredmet> studentpredmet { get; set; }
+
+        [JsonIgnore]
         public virtual vloga vloga { get; set; }
     }
 }
