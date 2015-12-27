@@ -9,6 +9,7 @@ namespace eStudentMVC5.Controllers
     public class AboutController : Controller
     {
         // GET: About
+        [OutputCache(CacheProfile = "CacheEstudentStatic")]
         public ActionResult Index()
         {
             return View();

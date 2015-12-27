@@ -9,6 +9,7 @@ namespace eStudentMVC5.Controllers
     public class LokacijaFakulteteController : Controller
     {
         // GET: LokacijaFakultete
+        [OutputCache(CacheProfile = "CacheEstudentStatic")]
         public ActionResult Index()
         {
             return View();

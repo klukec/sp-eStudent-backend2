@@ -12,10 +12,11 @@ namespace eStudentMVC5.Controllers
     [Authorize]
     public class PredmetiController : Controller
     {
-        estudentEntities db = new estudentEntities();
+        estudentEntities dbl = new estudentEntities();
 
         // GET: Predmeti
-        //[OutputCache(Duration = 60, VaryByParam = "idPredmet")]
+        // http://dotnetcodr.com/2013/02/07/caching-infrastructure-in-mvc4-with-c-caching-controller-actions/
+        // [OutputCache(Duration = 60, VaryByParam = "idPredmet")]
         [OutputCache(CacheProfile = "CacheEstudent")]
         public ActionResult Index(string idPredmet = "")
         {
@@ -26,7 +27,7 @@ namespace eStudentMVC5.Controllers
             }
             else
             {
-                predmet p = db.predmet.Find(Int32.Parse(idPredmet));
+                predmet p = dbl.predmet.Find(Int32.Parse(idPredmet));
                 var model = new PredmetiModel { seznamPredmetov = vrniVsePredmete(), predmetEdit = p };
                 return View(model);
             }  
@@ -41,16 +42,16 @@ namespace eStudentMVC5.Controllers
                 {
                     if (p.predmetEdit.idPredmet == 0)
                     {
-                        db.predmet.Add(p.predmetEdit);
-                        int uspeh = db.SaveChanges();
+                        dbl.predmet.Add(p.predmetEdit);
+                        int uspeh = dbl.SaveChanges();
                         int newId = p.predmetEdit.idPredmet;
                         Log.Info("Nov predmet ima ID: " + newId);
                         ModelState.Clear();
                     }
                     else
                     {
-                        db.Entry(p.predmetEdit).State = System.Data.Entity.EntityState.Modified;
-                        int uspeh = db.SaveChanges();
+                        dbl.Entry(p.predmetEdit).State = System.Data.Entity.EntityState.Modified;
+                        int uspeh = dbl.SaveChanges();
                     }
                 }
                 catch
@@ -68,9 +69,16 @@ namespace eStudentMVC5.Controllers
             return RedirectToAction("Index");
         }
 
+        [OutputCache(Duration = 86400)]
+        public ActionResult Urejaj()
+        {
+            ViewData["avgKrediti"] = BusinessLogic.povprecnoStKreditov();
+            return View();
+        }
+
         public List<predmet> vrniVsePredmete()
         {
-            var predmeti = from s in db.predmet select s;
+            var predmeti = from s in dbl.predmet select s;
             List<predmet> predmetiR = predmeti.ToList();
             return predmetiR;
         }
