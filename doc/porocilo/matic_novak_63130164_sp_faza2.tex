@@ -1,0 +1,64 @@
+% To je predloga za poročila o domačih nalogah pri predmetih, katerih
+% nosilec je Blaž Zupan. Seveda lahko tudi dodaš kakšen nov, zanimiv
+% in uporaben element, ki ga v tej predlogi (še) ni. Več o LaTeX-u izveš na
+% spletu, na primer na http://tobi.oetiker.ch/lshort/lshort.pdf.
+%
+% To predlogo lahko spremeniš v PDF dokument s pomočjo programa
+% pdflatex, ki je del standardne instalacije LaTeX programov.
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{a4wide}
+\usepackage{fullpage}
+\usepackage[utf8x]{inputenc}
+\usepackage[slovene]{babel}
+\selectlanguage{slovene}
+\usepackage[toc,page]{appendix}
+\usepackage[pdftex]{graphicx} % za slike
+\usepackage{setspace}
+\usepackage{color}
+\definecolor{light-gray}{gray}{0.95}
+\usepackage{listings} % za vključevanje kode
+\usepackage{hyperref}
+\renewcommand{\baselinestretch}{1.2} % za boljšo berljivost večji razmak
+\renewcommand{\appendixpagename}{Priloge}
+
+\lstset{ % nastavitve za izpis kode, sem lahko tudi kaj dodaš/spremeniš
+language=Python,
+basicstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize\setstretch{1},
+backgroundcolor=\color{light-gray},
+}
+
+\title{Izvedba strežniškega dela aplikacije \\ Spletno programiranje}
+\author{Matic Novak (63130164)}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Moji podatki}
+
+Matic Novak, 63130164, 2015/2016, spletno programiranje
+
+\section{Navodila za namestitev spletne aplikacije}
+
+Aplikacijo sem napisal v jeziku C\# in teče v okolju .NET MVC. Za odpiranje potrebujete Visual Studio 2013. V konfiguracijski datoteki Web.config je potrebno nastaviti connection string, ki aplikacijo poveže s podatkovno bazo. Uporabil sem MySQL podatkovno bazo, skripta za namestitev je priložena. Za preslikavo tabel v razrede sem uporabil ORM ADO.NET.
+
+\section{Uporabniški računi}
+
+V aplikaciji sem ustvaril 3 uporabniške račune, ki imajo skupno geslo: \texttt{Test123!}
+\begin{itemize}
+\item student@gmail.com
+\item profesor@gmail.com
+\item referat@gmail.com
+\end{itemize}
+
+\section{Predpomnenje}
+Aplikacijo sem nadgradil s \texttt{cachiranjem}. Tako dosegam precej boljše čase nalaganja (predvsem statičnih) strani. Predpomnenje sem nastavil na izbranih metodah. Tiste, ki vračajo statične strani (Lokacija fakultete, O aplikaciji) se shranijo v predpomnilnik za en dan. Tabele, ki se redkeje osvežujejo, se v predpomnilnik shranijo za nekaj sekund. Metode, ki vračajo specifične rezultate za posameznega uporabnika, se shranijo v lokalni (brskalnikov) predpomnilnik. Metode, ki vračajo enake poglede za vse uporabnike pa predpomnijo na strežniku. Profile predpomnenja sem shranil v konfiguracijsko datoteko, nad posameznimi metodami pa izbrani profil pokličem z ustrezno anotacijo.
+
+\section{Testiranje}
+Preizkusil sem še tehnike avtomatskega testiranja. Za funkcionalne teste sem uporabil Selenium, kjer sem napisal nekaj testnih scenarijev in jih shranil v datoteko. Ob izvedbi vrnejo status (uspeh) testiranja. Napisal sem npr. test za prijavo v aplikacijo, test za posodobitev osebnih podatkov...\newline
+Regresijske in performančne teste sem izvedel z orodjem JMeter. Nastavljal sem parameter, ki odraža število hkratnih uporabnikov sistema in opazoval odzivnost. Graf sem shranil v datoteko. Hitrost nalaganja strani sem si ogledal še v Google Chrome orodju za razvijalce, v zavihku Network. Nekaj posetkov zaslona sem priložil.
+
+\end{document}
