@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eStudentMVC5.Models;
 using eStudentMVC5.Business;
 
 namespace eStudentMVC5.Controllers
@@ -82,6 +83,7 @@ namespace eStudentMVC5.Controllers
             var index = client.Index(uporabnik);
             if (!index.IsValid)
             {
+                //Log.Error(index.ServerError.Error);
                 Log.Error("Error when indexing.");
             }
 
@@ -94,6 +96,13 @@ namespace eStudentMVC5.Controllers
                         );
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(SearchModel s)
+        {
+
+            return RedirectToAction("Index");
         }
 
         /*

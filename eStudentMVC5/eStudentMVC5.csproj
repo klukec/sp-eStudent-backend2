@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\RazpisiRokModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Models\ZakljuceniRokiModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PredmetiModel.cs" />
@@ -312,11 +313,11 @@
     <Content Include="Views\ZakljuceniRoki\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial_original.cshtml" />
     <Content Include="Views\Predmeti\Urejaj.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Default\" />
-    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
