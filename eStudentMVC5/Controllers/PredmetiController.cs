@@ -15,7 +15,6 @@ namespace eStudentMVC5.Controllers
         estudentEntities dbl = new estudentEntities();
 
         // GET: Predmeti
-        // http://dotnetcodr.com/2013/02/07/caching-infrastructure-in-mvc4-with-c-caching-controller-actions/
         // [OutputCache(Duration = 60, VaryByParam = "idPredmet")]
         [OutputCache(CacheProfile = "CacheEstudent")]
         public ActionResult Index(string idPredmet = "")
